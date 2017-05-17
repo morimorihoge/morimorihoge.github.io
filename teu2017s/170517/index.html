@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <script
+      src="https://code.jquery.com/jquery-3.2.1.js"
+      integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+      crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Bootstrap JavaScriptの使い方</h1>
+  <hr>
+  <h2>jQuery超基礎</h2>
+  <hr>
+  <h3>jQuery関数 <code>jQuery()</code> と <code>$()</code></h3>
+  <p>
+    jQueryの <code>jQuery()</code> 関数は、一般的にはそのショートカット形式である <code>$()</code> を通して利用されます。
+    <code>$()</code> という名前を使う別のライブラリと競合して使う場合には <code>jQuery()</code> を使う必要がありますが、
+    通常ブラウザでjQueryのJavaScriptコードを書く上では特に気にせず <code>$()</code> を使って良いでしょう。
+  </p>
+  <h3>セレクタによるHTML要素の指定</h3>
+  <p>
+    jQueryを使う上で最低限理解しなければいけないのは <strong>セレクタによるHTML要素指定</strong>です。
+    jQueryでのHTML要素操作には基本的にCSSセレクタを使ってHTML中の特定要素を指定します。
+  </p>
+  <p>
+    例えば、以下の様なHTMLがあるとします。
+  </p>
+  <figure class="highlight">
+    <pre>
+&#x3C;html&#x3E;
+&#x3C;head&#x3E;&#x3C;title&#x3E;sample&#x3C;/title&#x3E;&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+  &#x3C;h1&#x3E;&#x898B;&#x51FA;&#x3057;01&#x3C;/h1&#x3E;
+  &#x3C;p&#x3E;&#x672C;&#x6587;&#x3C;/p&#x3E;
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</pre>
+  </figure>
+  <p>この時、見出し部分をjQueryで指定するには</p>
+  <figure class="highlight">
+    <pre>
+$('h1');</pre>
+  </figure>
+  <p>とします。</p>
+  <p>
+    ChromeのDeveloper ToolsにあるConsole機能では、今開いているページに対して直接JavaScirptを実行することができますので、実際にこのページで試してみると良いでしょう。なお変更した内容をリセットしたい場合はブラウザをリロードすればOKです。
+  </p>
+
+  <h3>指定要素に対する操作</h3>
+  <p>
+    単に <code>$('h1');</code> としただけでは <code>[h1, prevObject: jQuery.fn.init(1)]</code> といったメッセージが表示されるだけかと思いますので、次はこの要素を操作してみましょう。以下のコードをChromeのConsoleタブで実行します。
+  </p>
+  <figure class="highlight">
+    <pre>
+$('h1').text('ほげほげ');</pre>
+  </figure>
+  <p>
+    すると、今表示しているページのh1見出し部分が「ほげほげ」に置き換わったと思います。<a href="http://api.jquery.com/text/" target="_blank">jQueryの.text()メソッド</a>は対象となるタグ内の文字列を置き換える機能がありますので、書き換わったわけです。
+  </p>
+  <p>
+    同じように今度は以下のコードを実行してみましょう（※全て半角です。中括弧・丸括弧の違いに注意）
+  </p>
+  <pre>
+$('h1').animate({opacity: 0.25}, 1000);</pre>
+  <p>
+    実行すると、h1要素が1秒間かけて薄い色になったと思います。同じように元に戻すには
+  </p>
+  <pre>
+$('h1').animate({opacity: 1}, 1000);</pre>
+  <p>
+    とします。これは <a href="http://api.jquery.com/animate/" target="_blank">jQueryの.animate()メソッド</a>を使って対象となる要素をアニメーションさせたということになります。
+  </p>
+  <p>
+    jQueryではこのようにして <strong><code>$()</code>メソッドで操作したい要素を特定し、取得した要素オブジェクトに対して操作したいメソッドを実行する</strong>のが基本になります。
+  </p>
+
+  <h3>要素操作の注意</h3>
+  <p>
+    jQueryのセレクタ指定では注意があります。このページで以下のコードを実行してみましょう。
+  </p>
+  <figure class="highlight">
+    <pre>
+$('h3').text('ほげほげ');</pre>
+  </figure>
+  <p>
+    <strong>複数のh3見出しの文字列がそれぞれ置き換わった</strong>のに気付けるでしょうか？このように、jQueryでのセレクタ指定は <strong>指定にマッチした要素全てが取得されるため、必ずしも選択される要素が一つではない可能性があります</strong>。
+    そのため、<code>h3</code>や <code>p</code> といったタグそのものを指定してしまうと、元々指定したくなかった要素までまとめて指定してしまうことが多々あります。
+  </p>
+  <p>
+    こうした意図せぬ挙動を避けるために、HTML側にあらかじめjQueryから指定するための <code>class</code> を定義しておくという手がよく使われます。
+    これはCSSで使うクラスと同じ物を使っても良いのですが、JavaScript操作用にそれぞれ別のクラスを割り当てることもあります。
+  </p>
+  <p class="pickup-paragraph">
+    以下のコードを実行してみると、この段落だけ色が赤くなります。
+  </p>
+  <figure class="highlight">
+    <pre>
+$('p.pickup-paragraph').css('color', 'red');</pre>
+  </figure>
+  <p>
+    <a href="http://api.jquery.com/css/" target="_blank">.cssメソッドはCSSプロパティを上書きするjQuery関数</a>です。
+    今回jQueryでのセレクタ指定に <code>p.pickup-paragraph</code>を使ったため、pタグでもpickup-paragraphクラスが指定された要素のみが指定されました。
+    （実際にHTMLソースも確認してみて下さい）。
+  </p>
+  <p>
+    以上の注意を気にしておけば、 <a href="http://getbootstrap.com/javascript/" target="_blank">Bootstrapに定義されているレベルのjQuery</a>なら見よう見まねでなんとか使えるかと思います。
+    とにかくJavaScriptに慣れていない内は <strong>ChromeのConsoleタブ</strong>を使ってエラーが出ていないかや、選択したい要素が選択できているかをチェックすると良いでしょう。
+  </p>
+</div>
+</body>
+</html>
