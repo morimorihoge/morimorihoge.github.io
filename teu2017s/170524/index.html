@@ -156,6 +156,38 @@
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
   </div>
 
+  <h2>どこまで細かく指定するのか問題</h2>
+  <p>
+    先に書いたように、Bootstrap Responsiveでは <strong>複数のサイズ指定がある場合は自動的にその指定より大きいサイズの指定に従います</strong>。
+    そのため、スマホ＋PCのみ対応で良ければ <code>xs</code>と <code>sm</code>の二つだけを指定すれば <strong><code>xs</code>サイズの場合はxsのルール、 <code>sm</code>以上のサイズであればsmのルールで表示されます</strong>。
+  </p>
+  <p>
+    以下はxsとsmのみを指定したグリッドで、xsサイズの場合2列、sm以上の場合は6列組になります。
+  </p>
+  <div class="row highlighted-grid">
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+  </div>
+  <p>
+    スマホ＋PC対応において、以前まではスマホはxsのみで良かったのが、昨今は小さめのタブレットと大きめのスマホがxs以上の横幅（768px以上）になることが出てきました。
+    スマホが大画面・高解像度化していることに合わせて、xs/smをスマホ向け、md/lgをPC向けとする動きもあります。
+    そんな場合には <code>xs</code>と <code>md</code>を指定すれば、 <stron>xs, smはxsサイズ、md, lgはmdサイズに従います</stron>。
+  </p>
+  <p>
+    以下はxsとmdのみを指定したグリッドです。
+  </p>
+  <div class="row highlighted-grid">
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+  </div>
 </div>
 </body>
 </html>
