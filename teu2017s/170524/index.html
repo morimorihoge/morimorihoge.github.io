@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta content="IE=edge" http-equiv=X-UA-Compatible>
+  <meta content="width=device-width,initial-scale=1" name=viewport>
   <title>Bootstrap responsiveの使い方</title>
 
   <!-- Latest compiled and minified CSS -->
@@ -28,6 +29,25 @@
 <body>
 <div class="container">
   <h1>Bootstrap Responsive</h1>
+  <hr>
+  <h2>忘れずにViewportの指定をする</h2>
+  <p>
+    モバイル端末対応する場合（そうじゃなくても）、まず必ずViewportの指定をしましょう。 <code>head</code>タグの中に以下の指定がなければ追加して下さい。
+  </p>
+  <figure class="highlight">
+    <pre>
+&#x3C;meta content=&#x22;IE=edge&#x22; http-equiv=X-UA-Compatible&#x3E;
+&#x3C;meta content=&#x22;width=device-width,initial-scale=1&#x22; name=viewport&#x3E;</pre>
+  </figure>
+  <p>
+    Viewportについては細かい解説をし始めると長くなるので簡単に説明します。
+    昨今のスマートフォンだと解像度が高くなりすぎて、画面上の1pxがブラウザ上の1pxに対応しないことがあります。
+    もし画面の1pxとブラウザの1pxを1:1で対応させてしまうと、画面が細かすぎて読めなくなるレベルなので、実際には1pxを縦横2倍して表示しています（最近は縦横3倍している端末も出てきた）。
+    Viewportの指定はそうした端末側の解像度とブラウザにレンダリングして欲しい解像度の間の設定を行ったり、明示的にブラウザにレンダリングして良い端末の横幅を指定することで、横スクロールが発生しないようにすることができます。
+  </p>
+  <p>
+    詳しく知りたい人は <a href="http://qiita.com/ryounagaoka/items/045b2808a5ed43f96607" target="_blank">Qiitaの「もう逃げない。HTMLのviewportをちゃんと理解する」という記事</a>が詳しいので参照すると良いです。
+  </p>
   <hr>
   <h2>4つの想定端末サイズ</h2>
   <p>
