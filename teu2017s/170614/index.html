@@ -31,6 +31,9 @@
   <div class="row">
     <div class="col-xs-12">
       <h1>Widgetサンプル</h1>
+    </div>
+    <div class="col-xs-12">
+      <h2>Twitter Widget</h2>
       <p>
         Twitter関連の埋め込みWidgetは <a href="https://dev.twitter.com/web/overview">このページに一覧されている</a>。
       </p>
@@ -56,15 +59,83 @@
       <pre>&#x3C;script async src=&#x22;//platform.twitter.com/widgets.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;</pre>
     </div>
     <div class="col-xs-12">
-      上記のscriptが読み込まれていれば、 <a href="https://dev.twitter.com/web/tweet-button">Tweet Button</a> にある
+      <p>
+        上記のscriptが読み込まれていれば、 <a href="https://dev.twitter.com/web/tweet-button">Tweet Button</a> にあるタグを使うことでTweetボタンなどを挿入することができる。
+      </p>
+      <pre>&#x3C;a class=&#x22;twitter-share-button&#x22;
+   href=&#x22;https://twitter.com/intent/tweet?text=Hello%20world&#x22;
+   data-size=&#x22;large&#x22;&#x3E;
+  Tweet&#x3C;/a&#x3E;</pre>
+    </div>
+    <div class="col-xs-12">
       <a class="twitter-share-button"
          href="https://twitter.com/intent/tweet?text=Hello%20world"
          data-size="large">
         Tweet</a>
     </div>
-
   </div>
-
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Google Maps</h2>
+      <p>
+        Google Mapsはいくつかの埋め込み方法が提供されているが、最も簡単に使えるのがiframeによる埋め込み機能である。
+        <a href="https://maps.google.co.jp">Google Mapsのページ</a>で表示させたい場所を検索したら、共有リンクから地図埋め込みタグを取得できる。
+      </p>
+      <div class="thumbnail">
+        <img src="images/google_maps_01.png" alt="google maps1">
+      </div>
+      <div class="thumbnail">
+        <img src="images/google_maps_02.png" alt="google maps2">
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <p>以下、実際に埋め込んだものとなる。</p>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3243.0577223757095!2d139.33716081516337!3d35.62630348020721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60191da6d0a3a261%3A0x337318568a7aaa3b!2z5p2x5Lqs5bel56eR5aSn5a2mIOWFq-eOi-WtkOOCreODo-ODs-ODkeOCuQ!5e0!3m2!1sja!2sjp!4v1497415048644" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+    <div class="col-xs-12">
+      <p>
+        他にも、Google Mapsの「マイプレイス」-> 「マイマップ」で作成した地図は公開設定にすると同様に埋め込むことができるので、地図・地理ベースの情報を効果的に見せたい時には便利である。
+        埋め込んだ地図の中をJavaScriptで制御したければ、 <a href="https://developers.google.com/maps/documentation/javascript/?hl=ja">Maps JavaScript API</a>を使うことでより凝った見せ方も可能だが、こちらはJavaScript実装の知識がある程度必要でやや難しいので、試してみたい人はサンプルコードを挿入して動かしてみるところから始めると良い。
+      </p>
+      <iframe src="https://www.google.com/maps/d/embed?mid=1WewFfpWl97aW8jEIzAnHC_yHwDI" width="640" height="480"></iframe>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Google Forms</h2>
+      <p>
+        ちょっとした問い合わせレベルであれば、Google Driveに搭載されているGoogle Formsが便利である。
+        <a href="https://drive.google.com/drive/">Googleドライブ</a>のサイトにログインし、左上の新規からフォームを選ぶとフォーム作成画面になる。
+      </p>
+      <div class="thumbnail">
+        <img src="images/google_forms_01.png" alt="google forms1">
+      </div>
+      <div class="thumbnail">
+        <img src="images/google_forms_02.png" alt="google forms2">
+      </div>
+    </div>
+    <div class="col-xs-12">
+      サイト内に埋め込むと以下の様になる。または別ページとして <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdzoxoZj-9PXzCWHn9GDP1ITDEtvX5-MSAdOS8kIZFFz4g5FQ/viewform?usp=sf_link">フォーム入力ページをリンクする方法</a> もある。
+    </div>
+    <div class="col-xs-12">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdzoxoZj-9PXzCWHn9GDP1ITDEtvX5-MSAdOS8kIZFFz4g5FQ/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます...</iframe>
+    </div>
+    <div class="col-xs-12">
+      <p>
+        入力した内容はGoogle Formsの編集ページに行けば回答チャートで見ることができる。
+      </p>
+      <div class="thumbnail">
+        <img src="images/google_forms_03.png" alt="google forms3">
+      </div>
+      <p>
+        集計等が取りたい場合には、回答先をGoogle SpreadSheetにすることで、一覧化も可能である。うまく使うと研究でアンケートを採ったりするのにも使えるので強力である。
+      </p>
+      <div class="thumbnail">
+        <img src="images/google_forms_04.png" alt="google forms4">
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
