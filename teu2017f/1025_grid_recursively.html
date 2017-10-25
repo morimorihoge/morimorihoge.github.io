@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrapグリッドレイアウト解説</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <h1>グリッドレイアウト入れ子解説</h1>
+  </div>
+
+  <div class="row" style="background-color: #ddd;">
+    <p>
+      Bootstrapのグリッドはcol内にさらにrow - col ... と入れ子にしていくことで、12分割よりもさらに詳細に分割することができる。
+      やり方としてはcolの中にrow - colと記述するだけで良く、外側のcolの中に書かれたrowの横幅を12として内側のcolの大きさが決まる。
+    </p>
+  </div>
+
+  <div class="row" style="height: 10px;"></div>
+
+  <div class="row">
+    <div class="col-xs-4" style="background-color: #88ff88;">col-xs-4サイズのサイドメニュー</div>
+    <div class="col-xs-8" style="background-color: #8888ff">
+      <h2>col-xs-8のコンテンツ</h2>
+
+      <div class="row" style="border: 1px solid #000000;">
+        <div class="col-xs-3" style="border: 1px solid #000000; background-color: #ffff88">内部rowのcol-xs-3のサブコンテンツ</div>
+        <div class="col-xs-9" style="border: 1px solid #000000; background-color: #ff88ff"
+        ">内部rowのcol-xs-9のサブコンテンツ
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="height: 10px;"></div>
+<div class="row" style="background-color: #ddd;">
+  <p>
+    入れ子グリッドを使うことで、通常は12分割しかできないBootstrapグリッドも、さらに細かい単位で分割することができる。
+  </p>
+</div>
+</div>
+</body>
+</html>
