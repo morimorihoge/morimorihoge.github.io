@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv=X-UA-Compatible>
+  <meta content="width=device-width,initial-scale=1" name=viewport>
+  <title>Bootstrap responsiveの使い方</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+        <!--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+  <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <script
+      src="https://code.jquery.com/jquery-3.2.1.js"
+      integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+      crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <style>
+    .highlighted-grid div {
+      border: 1px solid #8888ff;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Bootstrap Responsive</h1>
+  <hr>
+  <h2>忘れずにViewportの指定をする</h2>
+  <p>
+    モバイル端末対応する場合（そうじゃなくても）、まず必ずViewportの指定をしましょう。 <code>head</code>タグの中に以下の指定がなければ追加して下さい。
+  </p>
+  <figure class="highlight">
+    <pre>
+&#x3C;meta content=&#x22;IE=edge&#x22; http-equiv=X-UA-Compatible&#x3E;
+&#x3C;meta content=&#x22;width=device-width,initial-scale=1&#x22; name=viewport&#x3E;</pre>
+  </figure>
+  <p>
+    Viewportについては細かい解説をし始めると長くなるので簡単に説明します。
+    昨今のスマートフォンだと解像度が高くなりすぎて、画面上の1pxがブラウザ上の1pxに対応しないことがあります。
+    もし画面の1pxとブラウザの1pxを1:1で対応させてしまうと、画面が細かすぎて読めなくなるレベルなので、実際には1pxを縦横2倍して表示しています（最近は縦横3倍している端末も出てきた）。
+    Viewportの指定はそうした端末側の解像度とブラウザにレンダリングして欲しい解像度の間の設定を行ったり、明示的にブラウザにレンダリングして良い端末の横幅を指定することで、横スクロールが発生しないようにすることができます。
+  </p>
+  <p>
+    詳しく知りたい人は <a href="http://qiita.com/ryounagaoka/items/045b2808a5ed43f96607" target="_blank">Qiitaの「もう逃げない。HTMLのviewportをちゃんと理解する」という記事</a>が詳しいので参照すると良いです。
+  </p>
+  <hr>
+  <h2>4つの想定端末サイズ</h2>
+  <p>
+    Bootstrap3では、4つの端末サイズを想定してレスポンシブデザインの指定ができます。横幅によって以下の4種類に分けられます。
+  </p>
+  <ul>
+    <li><code>xs</code>: 最も小さいサイズ。スマートフォンの縦画面を想定（767px以下）</li>
+    <li><code>sm</code>: 2番目に小さいサイズ。大きめのスマートフォンの縦画面や小さめのタブレット端末の縦画面はこのサイズになることがある（768px以上991px以下）</li>
+    <li><code>md</code>: 標準的なサイズ。スマートフォンやタブレットの横画面、PCの比較的横幅小さめのサイズ（ノートPCで全画面かしないで少し空ける程度）になる（992px以上1199px以下）</li>
+    <li><code>lg</code>: 最も大きいサイズ。PCの全画面化した場合にこのサイズになる（1200px以上）</li>
+  </ul>
+  <p>
+    ただ、4つのサイズがあるとはいっても全てのサイズを指定する必要はありません。上記に指定されるサイズの指定がなく、 <strong>複数のサイズ指定がある場合は自動的にその指定より大きいサイズの指定に従います</strong>。
+  </p>
+  <p>
+    まずは <a href="http://www.wivern.com/bootstrap/css.html#responsive-utilities" target="_blank">Bootstrap日本語版のレスポンシブ・ユーティリティ</a>
+    のセクションを開き、ChromeのDeveloper Toolで要素をinspectして監視しつつブラウザの横幅を動かしてみて挙動を見てみると良いでしょう。
+    HTMLには書かれているのにブラウザの横幅によって表示されたりしなかったりする要素があることが確認できます。
+  </p>
+  <h2>表示ルールと実例</h2>
+  <p>
+    レスポンシブデザインでは「表示・非表示の使い分け」が大事になってきます。
+    原則大きな画面であればたくさんの情報を表示できますが、小さな画面になればなるほど一度に表示できる情報量は少なくなります。余白が全くないサイトは窮屈に見えてしまうので、スマホ・タブレット向けに小さい画面サイズ向けのデザインを考えるときは基本的に引き算していくことを意識しましょう。
+  </p>
+  <p>
+    例えば、<a href="http://www.teu.ac.jp/" target="_blank">工科大HP（http://www.teu.ac.jp/）</a>では、横幅1150px以上の時に限り、下図の赤枠部分が表示されますが、それより小さくすると表示幅の関係で消えます。
+  </p>
+  <div class="thumbnail"><img src="images/teu_1150px.png" alt="1150px以上"></div>
+  <div class="thumbnail"><img src="images/teu_1100px.png" alt="1100px"></div>
+  <p>
+    その他にも、さらに横幅を狭めるとサイドメニューが右上部のメニューアイコン部分に統合されたりと、なるべくそのページで一番見せたいコンテンツ以外の要素を減らしています。
+  </p>
+  <p>
+    表示・非表示のルールについてはQiitaにある <a href="http://qiita.com/akatsuki174/items/53b7367b04ed0b066bbf" target="_blank">Bootstrapのグリッドシステムについてまとめてみた</a>
+    という記事が非常にわかり易いので、そちらも参考にすると良いです。
+  </p>
+  <h2>注意:グリッド段落ち問題</h2>
+  <p>
+    Bootstrap Gridでは <code>xs</code> 以外のサイズはグリッドで指定したカラムレイアウトにならないことがあります。
+    以下に具体的なxs, sm, md, lgレイアウトを配置しますので、ブラウザ横幅を操作してどのように段落ちが発生するか確認してみましょう。
+  </p>
+  <div class="row highlighted-grid">
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+    <div class="col-xs-1">xs-1</div>
+  </div>
+  <hr>
+  <div class="row highlighted-grid">
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+    <div class="col-sm-1">sm-1</div>
+  </div>
+  <hr>
+  <div class="row highlighted-grid">
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+    <div class="col-md-1">md-1</div>
+  </div>
+  <hr>
+  <div class="row highlighted-grid">
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+    <div class="col-lg-1">lg-1</div>
+  </div>
+
+  <p>
+    見ての通り、 <code>sm</code>、<code>md</code>、<code>lg</code> サイズはそれぞれの指定サイズでない横幅になると段落ちしていきます。
+    一報、 <code>xs</code> サイズは最小幅に対する設定なので、 <strong>どんな幅にしても必ずグリッドレイアウトが崩れません</strong>。うまく使うと良いでしょう。
+    ただ、全てをxsでレイアウトしてしまうと、大きな横幅の時に見た目が良くならないという問題もあるので、まずはxsサイズでレイアウトを決めつつ、徐々にレスポンシブで大きめのサイズ指定を増やしていくのが良いと思います。
+  </p>
+  <p>
+    各サイズをうまく指定することで、端末サイズに適したレイアウトを自動でレイアウトできるようになります。
+    例えば、以下のdivタグは
+  </p>
+  <ul>
+    <li><code>lg</code>サイズの時、4列組</li>
+    <li><code>mg</code>サイズの時、3列組</li>
+    <li><code>sm</code>サイズの時、2列組</li>
+    <li><code>xs</code>サイズの時、1列組</li>
+  </ul>
+  <p>
+    という形でレスポンシブ対応したグリッドです。
+  </p>
+  <div class="row highlighted-grid">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">col-xs-12 col-sm-6 col-md-4 col-lg-3</div>
+  </div>
+
+  <h2>どこまで細かく指定するのか問題</h2>
+  <p>
+    先に書いたように、Bootstrap Responsiveでは <strong>複数のサイズ指定がある場合は自動的にその指定より大きいサイズの指定に従います</strong>。
+    そのため、スマホ＋PCのみ対応で良ければ <code>xs</code>と <code>sm</code>の二つだけを指定すれば <strong><code>xs</code>サイズの場合はxsのルール、
+    <code>sm</code>以上のサイズであればsmのルールで表示されます</strong>。
+  </p>
+  <p>
+    以下はxsとsmのみを指定したグリッドで、xsサイズの場合2列、sm以上の場合は6列組になります。
+  </p>
+  <div class="row highlighted-grid">
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+    <div class="col-xs-6 col-sm-2">col-xs-6 col-sm-2</div>
+  </div>
+  <p>
+    スマホ＋PC対応において、以前まではスマホはxsのみで良かったのが、昨今は小さめのタブレットと大きめのスマホがxs以上の横幅（768px以上）になることが出てきました。
+    スマホが大画面・高解像度化していることに合わせて、xs/smをスマホ向け、md/lgをPC向けとする動きもあります。
+    そんな場合には <code>xs</code>と <code>md</code>を指定すれば、
+    <stron>xs, smはxsサイズ、md, lgはmdサイズに従います</stron>
+    。
+  </p>
+  <p>
+    以下はxsとmdのみを指定したグリッドです。
+  </p>
+  <div class="row highlighted-grid">
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+    <div class="col-xs-6 col-md-2">col-xs-6 col-md-2</div>
+  </div>
+</div>
+</body>
+</html>
