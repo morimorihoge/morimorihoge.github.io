@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap4 レスポンシブデザインの解説</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<!-- 本来CSSは別ファイルにすべきですが、教材の都合上1ファイルの方がまとまってて見やすいと思うのでここではstyleタグを使います :bow: -->
+<style>
+</style>
+<body>
+
+<div class="container">
+  <h1>Bootstrap JavaScriptの使い方</h1>
+  <hr>
+  <h2>jQuery超基礎</h2>
+  <hr>
+  <h3>jQuery関数 <code>jQuery()</code> と <code>$()</code></h3>
+  <p>
+    jQueryの <code>jQuery()</code> 関数は、一般的にはそのショートカット形式である <code>$()</code> を通して利用されます。
+    <code>$()</code> という名前を使う別のライブラリと競合して使う場合には <code>jQuery()</code> を使う必要がありますが、
+    通常ブラウザでjQueryのJavaScriptコードを書く上では特に気にせず <code>$()</code> を使って良いでしょう。
+  </p>
+  <h3>セレクタによるHTML要素の指定</h3>
+  <p>
+    jQueryを使う上で最低限理解しなければいけないのは <strong>セレクタによるHTML要素指定</strong>です。
+    jQueryでのHTML要素操作には基本的にCSSセレクタを使ってHTML中の特定要素を指定します。
+  </p>
+  <p>
+    例えば、以下の様なHTMLがあるとします。
+  </p>
+  <pre class="bg-light"><code>
+&#x3C;html&#x3E;
+&#x3C;head&#x3E;&#x3C;title&#x3E;sample&#x3C;/title&#x3E;&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+  &#x3C;h1&#x3E;&#x898B;&#x51FA;&#x3057;01&#x3C;/h1&#x3E;
+  &#x3C;p&#x3E;&#x672C;&#x6587;&#x3C;/p&#x3E;
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</code></pre>
+  <p>この時、見出し部分をjQueryで指定するには</p>
+  <pre class="bg-light"><code>$('h1');</code></pre>
+  <p>とします。</p>
+  <p>
+    ChromeのDeveloper
+    ToolsにあるConsole機能では、今開いているページに対して直接JavaScirptを実行することができますので、実際にこのページで試してみると良いでしょう。なお変更した内容をリセットしたい場合はブラウザをリロードすればOKです。
+  </p>
+
+  <h3>指定要素に対する操作</h3>
+  <p>
+    単に <code>$('h1');</code> としただけでは <code>[h1, prevObject: jQuery.fn.init(1)]</code>
+    といったメッセージが表示されるだけかと思いますので、次はこの要素を操作してみましょう。以下のコードをChromeのConsoleタブで実行します。
+  </p>
+  <pre class="bg-light"><code>$('h1').text('ほげほげ');</code></pre>
+  <p>
+    すると、今表示しているページのh1見出し部分が「ほげほげ」に置き換わったと思います。<a href="http://api.jquery.com/text/"
+                                                 target="_blank">jQueryの.text()メソッド</a>は対象となるタグ内の文字列を置き換える機能がありますので、書き換わったわけです。
+  </p>
+  <p>
+    同じように今度は以下のコードを実行してみましょう（※全て半角です。中括弧・丸括弧の違いに注意）
+  </p>
+  <pre>
+$('h1').animate({opacity: 0.25}, 1000);</pre>
+  <p>
+    実行すると、h1要素が1秒間かけて薄い色になったと思います。同じように元に戻すには
+  </p>
+  <pre class="bg-light"><code>$('h1').animate({opacity: 1}, 1000);</code></pre>
+  <p>
+    とします。これは <a href="http://api.jquery.com/animate/" target="_blank">jQueryの.animate()メソッド</a>を使って対象となる要素をアニメーションさせたということになります。
+  </p>
+  <p>
+    jQueryではこのようにして <strong><code>$()</code>メソッドで操作したい要素を特定し、取得した要素オブジェクトに対して操作したいメソッドを実行する</strong>のが基本になります。
+  </p>
+
+  <h3>要素操作の注意</h3>
+  <p>
+    jQueryのセレクタ指定では注意があります。このページで以下のコードを実行してみましょう。
+  </p>
+  <pre class="bg-light"><code>$('h3').text('ほげほげ');</code></pre>
+
+  <p>
+    <strong>複数のh3見出しの文字列がそれぞれ置き換わった</strong>のに気付けるでしょうか？このように、jQueryでのセレクタ指定は <strong>指定にマッチした要素全てが取得されるため、必ずしも選択される要素が一つではない可能性があります</strong>。
+    そのため、<code>h3</code>や <code>p</code> といったタグそのものを指定してしまうと、元々指定したくなかった要素までまとめて指定してしまうことが多々あります。
+  </p>
+  <p>
+    こうした意図せぬ挙動を避けるために、HTML側にあらかじめjQueryから指定するための <code>class</code> を定義しておくという手がよく使われます。
+    これはCSSで使うクラスと同じ物を使っても良いのですが、JavaScript操作用にそれぞれ別のクラスを割り当てることもあります。
+  </p>
+  <p class="pickup-paragraph">
+    以下のコードを実行してみると、この段落だけ色が赤くなります。
+  </p>
+  <pre class="bg-light"><code>$('p.pickup-paragraph').css('color', 'red');</code></pre>
+  </figure>
+  <p>
+    <a href="http://api.jquery.com/css/" target="_blank">.cssメソッドはCSSプロパティを上書きするjQuery関数</a>です。
+    今回jQueryでのセレクタ指定に <code>p.pickup-paragraph</code>を使ったため、pタグでもpickup-paragraphクラスが指定された要素のみが指定されました。
+    （実際にHTMLソースも確認してみて下さい）。
+  </p>
+  <p>
+    以上の注意を気にしておけば、 <a href="https://getbootstrap.com/docs/4.1/components/alerts/#javascript-behavior" target="_blank">Bootstrap
+    Componentを操作するjQuery</a>なら見よう見まねでなんとか使えるかと思います。
+    とにかくJavaScriptに慣れていない内は <strong>ChromeのConsoleタブ</strong>を使ってエラーが出ていないかや、選択したい要素が選択できているかをチェックすると良いでしょう。
+  </p>
+
+  <h3>HTMLに組み込んで使う</h3>
+  <p>
+    開発者ツールのJavaScript Consoleからではなく、任意のタイミングで任意のコードを実行するにはイベントを設定します。
+    最も良く使われるのは <code>$('セレクタ').on()</code>によるイベント設定です。
+    自分のHTMLの中（原則 <code>bodyの閉じたタグのすぐ手前、jQueryの読み込み後</code>）で以下の様なコードを記述することで、h1タグ要素をクリックしたときに任意のJavaScriptコードを実行することができます。
+  </p>
+
+  <pre class="bg-light"><code>
+    &lt;script&gt;
+    $('h1').on('click', function(){
+      // ここに処理したいコードを書く
+    });
+    &lt;/script&gt;
+  </code></pre>
+
+  <p>
+    <code>'click'</code>の部分は他にも指定することができ、要素によっても設定できるイベントは異なりますが、<code>mouseover</code>なども使えます。
+    また、<code>input</code>タグの様にキー入力が可能な要素であれば <code>keyup</code>といったイベントで「キーボードのキーが押された」といったイベントも取ることができます。
+    以下はボタンの見た目の <code>div</code>クラスに <code>click_sample</code>というid属性を付け、id属性でボタンに対してclickイベントに反応するコードを登録しています。
+  </p>
+
+  <div>
+    <div id="click_sample" class="btn btn-primary">クリックサンプルボタン</div>
+  </div>
+
+  <pre class="bg-light"><code>
+    &lt;script&gt;
+    $('#click_sample').on('click', function () {
+      alert('ボタンが押されました');
+    });
+    &lt;/script&gt;
+  </code></pre>
+
+  <p>
+    JavaScriptはプログラミング言語のため、HTMLと違って <strong class="text-danger">少しでも書き方にエラーがあると実行を停止してしまいます</strong>。
+    そのため習得に時間はかかりますが、その分HTML/CSS単体ではできないことができるようになるので、少しずつでも使えるようになっていくとより良いWebサイトが作れるようになると思います。
+  </p>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+<script>
+  $('#click_sample').on('click', function () {
+    alert('ボタンが押されました');
+  });
+</script>
+
+</body>
+</html>
