@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap4 グリッドレイアウトの解説</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<!-- 本来CSSは別ファイルにすべきですが、教材の都合上1ファイルの方がまとまってて見やすいと思うのでここではstyleタグを使います :bow: -->
+<style>
+</style>
+<body>
+
+<div class="container">
+  <h1>Bootstrap4 グリッドレイアウトの解説</h1>
+  <p>
+    このページではBootstrap4のグリッドレイアウトについてまとめていきます。
+    そもそもBootstrapの使い方が分からない。忘れたと言う人は <a href="bootstrap_components.html">Bootstrapの解説</a>を先に読みましょう。
+  </p>
+
+  <div class="alert alert-primary">注: このページは<a href="https://getbootstrap.com/docs/4.1/layout/grid/" class="alert-link"
+                                               target="_blank">Layout/Gridの項</a>に対応します
+  </div>
+
+  <h2 class="pt-3">グリッドレイアウトとは？</h2>
+  <p>
+    以下はYahoo!ニュースの記事ページのスクリーンショットを撮り、横方向に12分割した補助線を引いたものです。
+    これを見ると、サイトのデザインが12分割された線に沿ってレイアウトされているのが分かるでしょうか。
+  </p>
+
+  <div>
+    <img src="images/grid_yahoo.png" alt="Yahoo!ニュースのグリッド割り付け" class="img-thumbnails img-fluid mx-auto d-block">
+  </div>
+
+  <p>
+    昨今のWebサイトデザインでは、ベストプラクティス（一般に良いとされている一般化されたノウハウ）として、このような格子状に補助線を引いた上で、Webページのパーツを
+    それに合わせて配置することが行われています。
+    こうしたレイアウト配置のことを <strong class="text-danger">グリッドレイアウト</strong>と呼びます。
+  </p>
+
+  <p>
+    グリッドレイアウトは12分割に限らず16分割や14分割など色々な分割数のサイトがありますが、 <strong>Bootstrapは12分割</strong>を採用しています。
+    12分割のメリットは色々と説明されますが、最大公約数が大きく、
+  </p>
+
+  <ul>
+    <li>1:1:1（3:3:3）の等幅配置</li>
+    <li>1:2（4:8）のサイドメニュー＋コンテンツの1/3配置</li>
+    <li>1:4:1（2:8:2）の左右サイドメニュー＋コンテンツ配置</li>
+  </ul>
+
+  <p>
+    など、様々なレイアウトが12分割で実現できる自由度が大きな点かと思います。
+  </p>
+
+  <h2 class="pt-3">グリッドレイアウトを使う：基礎編</h2>
+  <p>
+    <strong class="text-danger">グリッドレイアウトを使いたい場合は、事前に当該領域が <code>.container</code>または <code>.container-fluid</code>ブロック
+      で囲まれている必要があります</strong>。
+    containerブロックについては<a href="bootstrap_components.html">前回解説</a>を参照して下さい。
+  </p>
+
+  <p>
+    Bootstrapのグリッドレイアウトは、下図の様な構成になっています。 <strong> <code>.row</code>（行）</strong>の中に <strong>
+    <code>col</code>（列:column）</strong>を1つ以上置くことで、
+    グリッドの格子を実現します。
+  </p>
+
+  <div>
+    <img src="images/row-and-col2.png" alt="行と列" class="img-thumbnails img-fluid mx-auto d-block">
+  </div>
+
+  <p>
+    注意すべき点は、 <strong class="text-danger">必ずrowの中にcolを置くこと</strong>です。逆に書いても動作しません。
+    また、 <strong class="text-danger">コンテンツはcol要素の中に書くようにします</strong>。これを守らないと表示が崩れてしまうことがあります。
+  </p>
+
+  <p>
+    一番簡単な例は等幅分割の例です。この場合は <code>.row</code>ブロックの中に <code>.col</code>ブロックを分割したい数だけ配置します。
+    ブロック要素のタグであればタグは何でも構いませんが、一般には <code>div</code>タグを使います。
+    以下の要素をChromeの開発者ツールで確認してみましょう（<code>.border</code>は枠線を付けてグリッドの境目をわかりやすくするために付けています）。
+    ※borderのドキュメントは<a href="https://getbootstrap.com/docs/4.1/utilities/borders/" target="_blank">こちら</a>にあります。
+  </p>
+
+  <div class="row">
+    <div class="col border">col1つ目</div>
+    <div class="col border">col2つ目</div>
+  </div>
+
+  <div class="row">
+    <div class="col border">col1つ目</div>
+    <div class="col border">col2つ目</div>
+    <div class="col border">col3つ目</div>
+  </div>
+
+  <div class="row">
+    <div class="col border">col1つ目</div>
+    <div class="col border">col2つ目</div>
+    <div class="col border">col3つ目</div>
+    <div class="col border">col4つ目</div>
+  </div>
+
+  <div class="row">
+    <div class="col border">col1つ目</div>
+    <div class="col border">col2つ目</div>
+    <div class="col border">col3つ目</div>
+    <div class="col border">col4つ目</div>
+    <div class="col border">col5つ目</div>
+  </div>
+
+  <p>
+    上記の例は等幅分割の例になるため、Youtubeの動画一覧の様にコンテンツを等幅に敷き詰めるようなレイアウトであれば問題ありませんが、
+    Yahoo!ニュースのサイドメニューの例の様な例ではうまくいきません。
+    そこで、次は12分割グリッドを使ってみましょう。
+  </p>
+
+  <p>
+    先の例と <code>.row</code>を使うのは同じで、内側の <code>.col</code>を <code>.col-#{数値}</code>とします。
+    <code>#{数値}</code>の部分には、そのcol要素に12分割分したうちのいくつ分の幅を割り当てるかを入れます（1〜11）。
+    以下、例によってChromeの開発者ツールで確認してみましょう。
+  </p>
+
+  <div class="row">
+    <div class="col-4 border">col-4の幅</div>
+    <div class="col-8 border">col-8の幅</div>
+  </div>
+
+  <div class="row">
+    <div class="col-2 border">col-2の幅</div>
+    <div class="col-8 border">col-8の幅</div>
+    <div class="col-2 border">col-2の幅</div>
+  </div>
+
+  <p>
+    イメージは掴めましたか？注意として、 <code>#{数値}</code>を指定する場合には、1つの <code>.row</code>の中に足して12になるように
+    colの割り当てを調整しないと想定外の動作をする可能性があります。
+    <strong class="text-danger">基本的に、足りない分のcol部分は空白、はみ出すブロックが出た場合は次の行に折り返しされます。</strong>
+  </p>
+
+  <div class="row">
+    <div class="col-2 border">col-2の幅</div>
+    <div class="col-9 border">col-9の幅</div>
+  </div>
+
+  <div class="row">
+    <div class="col-5 border">col-5の幅</div>
+    <div class="col-5 border">col-5の幅</div>
+    <div class="col-5 border">col-5の幅</div>
+  </div>
+
+  <p>
+    また、上記に挙げてきた例の様に、<code>.row</code>の次にまた <code>.row</code>を置くことで、次の行を間を空けずに定義することができます。
+    これにより、ここまでの内容だけで世の中の一般的なサイトレイアウトが実現できます。
+    以下はとても一般的なヘッダ＋サイドメニュー＋フッタの構成例です。どのような構成になっているか開発者ツールで確認してみましょう。
+  </p>
+
+  <div>
+    <div class="row">
+      <div class="col border border-warning"><div class="h1">ゆうすけのほーむぺーじ</div></div>
+    </div>
+    <div class="row">
+      <div class="col-3 border border-primary">
+        <h2>めにゅー</h2>
+        <ul>
+          <li>TOP</li>
+          <li>About</li>
+          <li>掲示板</li>
+          <li>リンク集</li>
+        </ul>
+      </div>
+      <div class="col-9 border border-secondary">
+        <h1>トップページ</h1>
+        <hr>
+        <p>
+          ゆうすけのホームページへようこそ！あなたは000123人目の訪問者です！
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center border border-info">
+        &copy; 2018 ゆうすけ
+      </div>
+    </div>
+  </div>
+
+  <h2 class="pt-3">グリッドレイアウトを使う：応用編</h2>
+  <p>
+    ところで、グリッドレイアウトは入れ子にすることができます（グリッドレイアウトの中にグリッドレイアウトを配置できる）。
+    例えば、コンテンツ部分の中をさらにグリッドで分割したい場合があります。
+  </p>
+
+  <div>
+    <img src="images/youtube-recursive-grid.png" alt="Youtubeの入れ子グリッドの例" class="img-thumbnails img-fluid mx-auto d-block">
+  </div>
+
+  <p>
+    上記はYoutubeでチャンネルの動画リストを表示した画面になります。全体がヘッダ＋左サイドメニュー＋コンテンツに分割されていますが、
+    コンテンツ部分の中がさらに動画サムネイルでグリッドレイアウトされています。
+    こういった場合に入れ子グリッドを使うと管理しやすく作ることができます。
+  </p>
+
+  <p>
+    入れ子グリッドの作り方は、グリッドの要素（col）にさらに <code>.row</code>、 <code>.col</code>を書いていけば良いです。
+    以下のサンプルを開発者ツ（以下略
+  </p>
+
+  <div class="row">
+    <div class="col-2 border">外側のcol-2</div>
+    <div class="col-10 border">
+      <p>外側のcol-10</p>
+      <div class="row">
+        <div class="col-3 border border-info">内側のcol-3</div>
+        <div class="col-3 border border-info">内側のcol-3</div>
+        <div class="col-3 border border-info">内側のcol-3</div>
+        <div class="col-3 border border-info">内側のcol-3</div>
+        <div class="col-3 border border-info">内側のcol-3</div>
+        <div class="col-3 border border-info">内側のcol-3</div>
+        <div class="col-3 border border-info">内側のcol-3</div>
+      </div>
+    </div>
+  </div>
+
+  <p>
+    注意すべき点として、入れ子グリッドは便利ですが、HTMLのタグ構造が複雑になってしまうため <strong>多用すると混乱しがち</strong>です。
+    使うにしても2層程度に留めるのが無難でしょう。
+  </p>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+</body>
+</html>
