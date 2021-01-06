@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.js"></script>
+
+<div style="height: 200px"></div>
+
+<div id="hogehoge">ほげほげ</div>
+
+<button onclick="moveAnimation()">move</button>
+
+<script>
+  function moveAnimation() {
+    // anime({
+    //   targets: '#hogehoge',
+    //   translateX: 250,
+    //   duration: 10000
+    // })
+    anime({
+      targets: '#hogehoge',
+      keyframes: [
+        {
+          translateX: 25,
+          rotate: '45deg'
+        },
+        {translateY: 10},
+        {translateX: 0},
+        {translateY: 0},
+        {
+          translateX: 25,
+          translateY: 10
+        },
+        {
+          translateX: 0,
+          translateY: 0,
+          rotate: '0deg'
+        }
+
+      ],
+      duration: 4000
+    })
+  }
+</script>
+
+</body>
+</html>
