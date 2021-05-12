@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+  <title>Bootstrap4の解説</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<!-- 本来CSSは別ファイルにすべきですが、教材の都合上1ファイルの方がまとまってて見やすいと思うのでここではstyleタグを使います :bow: -->
+<style>
+</style>
+<body>
+<div class="container">
+  <h1>Bootstrap4の解説</h1>
+  <p>
+    このページではとりあえずBootstrap4を使うのに必要な情報をまとめていきます。
+    このページ自体がBootstrap4で作られているので、よく分からない場合はChromeのDeveloper Tool等を使ってソースを見てみると良いと思います。
+  </p>
+
+  <h2>とにかく基本</h2>
+  <p>
+    <a href="https://getbootstrap.com/docs/4.5/getting-started/introduction/" target="_blank">公式のGetting
+      startedページ</a>を見ましょう。
+    基本的なことはここの左メニューを上から順番に進めていけばできるようになります。
+    また、このページ自体もBootstrapなので、とにかく「この見た目使いたい」と思ったらソースを見てマネしてみるというのが慣れるコツです。
+  </p>
+  <p>
+    自分のHTMLにBootstrapを適用するには、<a href="https://getbootstrap.com/docs/4.5/getting-started/introduction/"
+                                target="_blank">上記Getting
+    startedページ</a>の
+    <b>CSS</b>及び<b>JS</b>と書かれた部分にあるタグを挿入します。
+    CSSの<code>link</code>タグは<code>head</code>タグの中に（<code>title</code>タグの下くらいで良いでしょう）、
+    JSの<code>script</code>タグは<code>&lt;/body&gt;</code>の1行手前にコピペします。
+  </p>
+  <p>
+    よく分からなければこのページのHTMLを参考にして下さい。また、Getting startedページに書かれているlinkタグとscriptタグのURLは、Bootstrapのバージョンアップが行われると
+    更新されていくため、このページには記載しません（なるべく4系の最新バージョンを使いましょう）。
+  </p>
+
+  <h2>最初におまじない: containerクラス</h2>
+  <div class="alert alert-primary">注: この説は<a href="https://getbootstrap.com/docs/4.5/layout/overview/"
+                                             class="alert-link" target="_blank">Layoutの項</a>に対応します
+  </div>
+  <p>
+    実際に大事になってくるのはレスポンシブレイアウトをするタイミングになってくるのですが、最初から癖にしておいた方が良いのがcontainerクラスです。
+    containerクラスの中にコンテンツを置くと、左右余白の調整などをよしなにやってくれます。
+  </p>
+  <p>
+    試しにChromeのDeveloperツールでこのページの<code>body</code>タグ直下にある<code>div</code>タグの<code>container</code>クラスを外してみましょう。
+    また、containerクラスあるなしでブラウザの横幅を伸び縮みさせてみると、containerクラスの役割がなんとなく分かると思います。
+  </p>
+  <p>
+    というわけで、基本的に慣れるまでは<b class="text-danger">全てのコンテンツはcontainerクラスのdivタグ内に入れる</b>と思っておいて下さい。
+    また、<code>container</code>クラスは横幅が非連続的な段階のレスポンシブレイアウト向けですが、ブラウザの横幅目一杯を柔軟に使いたい場合には<code>container-fluid</code>
+    クラスを使うことでとても長い横幅にも対応することができます（どんな動きになるかは案の定開発者ツールで試してみて下さい）。
+  </p>
+
+  <h2>基本となるタグ</h2>
+  <div class="alert alert-primary">注: この説は<a href="https://getbootstrap.com/docs/4.5/content/reboot/"
+                                             class="alert-link"
+                                             target="_blank">Contentの項</a>に対応します
+  </div>
+  <p>
+    Bootstrapを適用すると、各ブラウザが固有に定義しているデフォルトのCSSを上書きし、どのブラウザでも同じ見た目になるようにデフォルトCSSが更新されます。
+    BootstrapではReboot.cssというものを使っていますので、もし定義の内容が詳しく知りたい人は<a
+      href="https://raw.githubusercontent.com/twbs/bootstrap/v4-dev/dist/css/bootstrap-reboot.css" target="_blank">Reboot.cssのソースコード</a>を参照してみてください。
+    こちらのソースはコメントがないので何をやっているのかわかりにくいという場合は、<a href="https://github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss"
+                                              target="_blank">本家のSCSS（CSSの拡張言語）版</a>を見た方がわかりやすいと思います。
+  </p>
+  <p>
+    <a href="https://getbootstrap.com/docs/4.5/content/reboot/" target="_blank">Bootstrap本家の解説</a>を流し見ても分かる通り、<b>HTMLの基本的なタグ</b>がそのまま使えます。
+    <code>h1</code>〜<code>h6</code>タグや<code>ul</code>,<code>li</code>タグなど、基本的なHTMLに存在するタグはそのままBootstrapが上書きしていますので、
+    単純に文章を書く程度であれば何も気にせず普通のHTMLを書く感覚で記述すれば良いです。
+  </p>
+  <p>
+    見出しやリストなどの基本的な物は <a href="https://getbootstrap.com/docs/4.5/content/typography/" target="_blank">Typography</a>のページ、
+    等幅でソースコード貼り付けをしたい場合などは <a href="https://getbootstrap.com/docs/4.5/content/code/" target="_blank">Code</a>のページが参考になります。
+  </p>
+  <pre class="bg-light"><code>
+    &lt;div class=&quot;alert alert-primary&quot;&gt;こんな感じでソースコードを「らしく」見せることもできます&lt;/div&gt;
+  </code></pre>
+
+  <h2>便利なコンポーネント</h2>
+  <div class="alert alert-primary">注: この説は<a href="https://getbootstrap.com/docs/4.5/components/alerts/"
+                                             class="alert-link" target="_blank">Componentの項</a>に対応します
+  </div>
+  <p>
+    Bootstrapを使ってとても便利なのがComponentです。これはWebページ作成に「ありがち」な部品をデフォルトのデザイン付きで用意してくれています。
+  </p>
+
+  <div class="alert alert-success"><a href="https://getbootstrap.com/docs/4.5/components/alerts/"
+                                      target="_blank">Alert</a>はちょっとした情報を通知して見せたりするのに便利です
+  </div>
+  <p>
+    <span class="badge badge-primary">Badge</span>はちょっとしたアイコン代わりのような使い方ができます: <a
+      href="https://getbootstrap.com/docs/4.5/components/badge/" target="_blank">Badge</a>
+  </p>
+  <p>
+    <button class="btn btn-warning">Button</button>
+    はユーザーに押させたい・クリックさせたいような用途に使いやすいです: <a href="https://getbootstrap.com/docs/4.5/components/buttons/"
+                                          target="_blank">Button</a>
+  </p>
+  <p>
+    その他にも色々あるので、 <a href="https://getbootstrap.com/docs/4.5/components/alerts/">公式Componentsページ</a>の左メニューはざっと眺めてみましょう。
+  </p>
+
+  <h2>その他のよくある部品</h2>
+  <div class="alert alert-primary">注: この説は<a href="https://getbootstrap.com/docs/4.5/utilities/borders/"
+                                             class="alert-link" target="_blank">Utilitiesの項</a>に対応します
+  </div>
+  <p>
+    その他、良くある話として <span class="text-danger">テキストを赤くしたり</span><span class="text-primary">青くしたり</span>、
+  </p>
+  <p class="text-center">
+    文字を中央寄せしたり
+  </p>
+  <p class="text-right">
+    右寄せしたり
+  </p>
+  <p>
+    なんてことができます。 <a href="https://getbootstrap.com/docs/4.5/utilities/colors/" target="_blank">Colors</a>, <a
+      href="https://getbootstrap.com/docs/4.5/utilities/text/" target="_blank">Text</a>
+  </p>
+
+  <h2>Bootstrapとの付き合い方</h2>
+  <p>
+    Bootstrapを使う時の基本は<b><span class="text-danger">なるべく自前のCSSを書かないこと</span></b>です。どうしてもBootstrapに定義されていないもののみを
+    自前でCSS定義し、それ以外は基本Bootstrapにやりたい機能がないかを探して其方を使いましょう。
+    でないと、表示崩れが発生したりする原因になります。
+  </p>
+  <p>
+    例えば、基本となるタグの項でコードハイライトとして
+  </p>
+  <pre class="bg-light"><code>
+    こういう背景色薄いグレーのブロック
+  </code></pre>
+  <p>
+    を使いましたが、背景グレーのブロックは <code>.bg-light</code>というものが <a href="https://getbootstrap.com/docs/4.5/utilities/colors/"
+                                                        target="_blank">Bootstrapで定義されています</a>。
+    そのため、色が使いたい色と違う！等の理由がなければ基本的には<code>.bg-light</code>を使うべきです。もっと言うなら、色が違っても「明るめのグレー」という点で変わらないなら、Bootstrap側の定義を
+    上書きして、あくまでCSSクラスとしては<code>.bg-light</code>を使うようにすると、同じようにBootstrapを使っている人にも説明なしに意図が伝わって汎用性の高いコードになります。
+  </p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

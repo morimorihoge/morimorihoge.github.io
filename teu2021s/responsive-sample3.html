@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+  <title>レスポンシブサンプル2</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<!-- 本来CSSは別ファイルにすべきですが、教材の都合上1ファイルの方がまとまってて見やすいと思うのでここではstyleタグを使います :bow: -->
+<style>
+</style>
+<body>
+
+<div class="container">
+  <h1>レスポンシブサンプル3</h1>
+
+  <p class="pt-4">
+    以下は各サイズのみで表示される組み合わせを使い、今どのサイズのモードなのかを表示しています。
+    ※詳しくはソースを見ましょう
+  </p>
+  <div class="row">
+    <div class="col d-block d-sm-none border">今のウィンドウ幅はxsサイズです</div>
+    <div class="col d-none d-sm-block d-md-none border">今のウィンドウ幅はsmサイズです</div>
+    <div class="col d-none d-md-block d-lg-none border">今のウィンドウ幅はmdサイズです</div>
+    <div class="col d-none d-lg-block d-xl-none border">今のウィンドウ幅はlgサイズです</div>
+    <div class="col d-none d-xl-block d-xl-none border">今のウィンドウ幅はxlサイズです</div>
+  </div>
+
+  <p class="pt-4">以下はsmサイズ以下の時のみ表示される</p>
+  <div class="row">
+    <div class="col d-block d-md-none border">今のウィンドウ幅はsmサイズ以下です</div>
+  </div>
+
+  <p class="pt-4">以下はsmサイズ以下の時のみサイドメニューが表示される</p>
+
+  <div>
+    <div class="row">
+      <div class="col border border-warning"><div class="h1">ゆうすけのほーむぺーじ</div></div>
+    </div>
+    <div class="row">
+      <div class="d-none d-md-block col-md-3 border border-primary">
+        <h2>めにゅー</h2>
+        <ul>
+          <li>TOP</li>
+          <li>About</li>
+          <li>掲示板</li>
+          <li>リンク集</li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-9 border border-secondary">
+        <h1>トップページ</h1>
+        <hr>
+        <p>
+          ゆうすけのホームページへようこそ！あなたは000123人目の訪問者です！
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center border border-info">
+        &copy; 2018 ゆうすけ
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+</body>
+</html>
