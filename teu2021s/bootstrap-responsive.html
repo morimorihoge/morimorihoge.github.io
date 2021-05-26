@@ -23,7 +23,7 @@
 
   <div class="alert alert-primary">
     注: このページは<a href="https://getbootstrap.com/docs/4.5/layout/grid/" class="alert-link"
-                                               target="_blank">Layout/Gridの項</a>に対応します（主にResponsive classes周辺）
+                target="_blank">Layout/Gridの項</a>に対応します（主にResponsive classes周辺）
   </div>
 
   <h2 class="pt-3">レスポンシブデザインとは？</h2>
@@ -35,11 +35,14 @@
   </p>
 
   <div class="row">
-    <div class="col"><img src="images/pc_style.png" alt="PCでの見た目" class="img-thumbnails img-fluid mx-auto d-block"></div>
+    <div class="col"><img src="images/pc_style.png" alt="PCでの見た目" class="img-thumbnails img-fluid mx-auto d-block">
+    </div>
   </div>
   <div class="row">
-    <div class="col"><img src="images/sp_style.png" alt="スマホでの見た目" class="img-thumbnails img-fluid mx-auto d-block"></div>
-    <div class="col"><img src="images/sp_style2.png" alt="スマホでの見た目（メニュー展開）" class="img-thumbnails img-fluid mx-auto d-block"></div>
+    <div class="col"><img src="images/sp_style.png" alt="スマホでの見た目" class="img-thumbnails img-fluid mx-auto d-block">
+    </div>
+    <div class="col"><img src="images/sp_style2.png" alt="スマホでの見た目（メニュー展開）"
+                          class="img-thumbnails img-fluid mx-auto d-block"></div>
   </div>
 
   <p>
@@ -49,8 +52,19 @@
   <p>
     レスポンシブデザインの内部実装は、CSS Media Queriesという機能を使っていてCSSの機能を使って実現されています。
     具体的には、CSSのセレクタにスクリーンサイズを条件に付けることができ、それを使って「横幅 1000px 以上ならこのスタイルを適用する」といった場合分けで実現されています。
-    CSS Media Queriesについて詳しく知りたい場合は <a href="https://parashuto.com/rriver/responsive-web/basics-on-media-queries" target="
+    CSS Media Queriesについて詳しく知りたい場合は <a href="https://parashuto.com/rriver/responsive-web/basics-on-media-queries"
+                                       target="
 _blank">こちらのサイト</a>などを見てみると良いです。
+  </p>
+
+  <h2 class="pt-3">レスポンシブデザインの実装：最初の「おまじない」</h2>
+  <p>
+    レスポンシブ対応のコードを書き始める前に、<strong class="text-danger">HTMLのheadタグ内に必ず以下のmetaタグを記述して下さい</strong>。
+  <pre class="bg-light"><code>
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+</code></pre>
+  このmetaタグを付与することで、主にスマートフォンやタブレットなどの横幅の狭いブラウザに対して画面の横幅をコンテンツ横幅と同じになるようにさせることで、横スクロールを抑制することができます。
+    <strong class="text-danger">レスポンシブデザインの実装中、横幅を小さくしたときに横スクロールが出てしまう場合、この設定がしてあるかをまず確認しましょう</strong>。
   </p>
 
   <h2 class="pt-3">レスポンシブデザインの実装：基礎編</h2>
@@ -171,7 +185,7 @@ _blank">こちらのサイト</a>などを見てみると良いです。
   <h2 class="pt-3">レスポンシブデザインの実装：応用編</h2>
   <div class="alert alert-primary">
     注: この部分は<a href="https://getbootstrap.com/docs/4.5/utilities/display/" class="alert-link"
-                target="_blank">Utilities/Displayの項</a>に対応します（Hiding elements周辺）
+               target="_blank">Utilities/Displayの項</a>に対応します（Hiding elements周辺）
   </div>
 
   <p>
