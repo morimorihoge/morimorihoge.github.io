@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Bootstrap5 レスポンシブデザインの解説</title>
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HS9VQ3TQCH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HS9VQ3TQCH');
+</script>
+
+<!-- 本来CSSは別ファイルにすべきですが、教材の都合上1ファイルの方がまとまってて見やすいと思うのでここではstyleタグを使います :bow: -->
+<style>
+</style>
+<body>
+
+<div class="container">
+  <h1>Bootstrap5 レスポンシブデザインの解説</h1>
+  <p>
+    このページではBootstrap5のレスポンシブデザインについてまとめていきます。
+    そもそもBootstrapの使い方が分からない。忘れたという人は <a href="bootstrap_components.html">Bootstrapの解説</a>を先に読みましょう。
+    まだBootstrap5のグリッドレイアウトについて理解が怪しいという人は <a href="bootstrap-grid.html">Bootstrap グリッドレイアウトの解説</a>を先に読みましょう。
+  </p>
+
+  <div class="alert alert-primary">
+    注: このページは<a href="https://getbootstrap.com/docs/5.0/layout/grid/" class="alert-link"
+                target="_blank">Layout/Gridの項</a>に対応します（主にResponsive classes周辺）
+  </div>
+
+  <h2 class="pt-3">レスポンシブデザインとは？</h2>
+  <p>
+    PCやタブレット、スマホ環境では画面サイズやUIのルール（常識）が所々異なります。
+    例えば、PCでは画面上部や左右に固定メニューを配置してナビゲーションとすることが良くありますが、画面が狭く縦長のスマホ環境では
+    左右に固定メニューを出すとメインのコンテンツが見えなくなってしまうので、フッタにまとめたり、ハンバーガーアイコン（下図参照）等を使い、クリックすると
+    メニューが出てくるようなUIにすることがより自然とされています。
+  </p>
+
+  <div class="row">
+    <div class="col"><img src="images/pc_style.png" alt="PCでの見た目" class="img-thumbnails img-fluid mx-auto d-block">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"><img src="images/sp_style.png" alt="スマホでの見た目" class="img-thumbnails img-fluid mx-auto d-block">
+    </div>
+    <div class="col"><img src="images/sp_style2.png" alt="スマホでの見た目（メニュー展開）"
+                          class="img-thumbnails img-fluid mx-auto d-block"></div>
+  </div>
+
+  <p>
+    このように、PCとスマホで <strong>URL（HTML）は同じだが、見ている端末や画面表示の種類に応じて見やすいデザインに切り替わるものを、レスポンシブデザイン</strong>と呼びます。
+    レスポンシブデザインは昨今のWebサイトではとても一般的に用いられるテクニックですので、名前を覚えておきましょう。
+  </p>
+  <p>
+    レスポンシブデザインの内部実装は、CSS Media Queriesという機能を使っていてCSSの機能を使って実現されています。
+    具体的には、CSSのセレクタにスクリーンサイズを条件に付けることができ、それを使って「横幅 1000px 以上ならこのスタイルを適用する」といった場合分けで実現されています。
+    CSS Media Queriesについて詳しく知りたい場合は <a href="https://parashuto.com/rriver/responsive-web/basics-on-media-queries"
+                                       target="
+_blank">こちらのサイト</a>などを見てみると良いです。
+  </p>
+
+  <h2 class="pt-3">レスポンシブデザインの実装：最初の「おまじない」</h2>
+  <p>
+    レスポンシブ対応のコードを書き始める前に、<strong class="text-danger">HTMLのheadタグ内に必ず以下のmetaタグを記述して下さい</strong>。
+  <pre class="bg-light"><code>
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+</code></pre>
+  このmetaタグを付与することで、主にスマートフォンやタブレットなどの横幅の狭いブラウザに対して画面の横幅をコンテンツ横幅と同じになるようにさせることで、横スクロールを抑制することができます。
+    <strong class="text-danger">レスポンシブデザインの実装中、横幅を小さくしたときに横スクロールが出てしまう場合、この設定がしてあるかをまず確認しましょう</strong>。
+  </p>
+
+  <h2 class="pt-3">レスポンシブデザインの実装：基礎編</h2>
+  <p>
+    Bootstrapでは、レスポンシブデザインはグリッドレイアウトの拡張機能として実装されています。そのため、前提条件としてグリッドレイアウトが動作する環境が必要です。
+    <strong class="text-danger">事前に当該領域が <code>.container</code>または <code>.container-fluid</code>ブロック
+      で囲まれている必要がある点を忘れないようにして下さい</strong>。
+  </p>
+
+  <p>
+    レスポンシブデザインの <strong>デザイン切り替えの基準となるのは画面の横幅</strong>になります。
+    Bootstrapでは、画面の横幅範囲に応じてExtra smallからExtra largeまで名前が付いており、それぞれごとに指定することができます。
+  </p>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th></th>
+      <th class="text-center">
+        Extra small<br>
+        <small>&lt;576px</small>
+      </th>
+      <th class="text-center">
+        Small<br>
+        <small>≥576px</small>
+      </th>
+      <th class="text-center">
+        Medium<br>
+        <small>≥768px</small>
+      </th>
+      <th class="text-center">
+        Large<br>
+        <small>≥992px</small>
+      </th>
+      <th class="text-center">
+        Extra large<br>
+        <small>≥1200px</small>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th class="text-nowrap" scope="row">コンテナサイズの境目</th>
+      <td>None (auto)</td>
+      <td>540px</td>
+      <td>720px</td>
+      <td>960px</td>
+      <td>1140px</td>
+    </tr>
+    <tr>
+      <th class="text-nowrap" scope="row">クラス名ルール</th>
+      <td><code>.col-</code></td>
+      <td><code>.col-sm-</code></td>
+      <td><code>.col-md-</code></td>
+      <td><code>.col-lg-</code></td>
+      <td><code>.col-xl-</code></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p>
+    ※Bootstrap4までは上記の5種類でしたが、Bootstrap5でxxlサイズが追加されました。ただ、あまり細かくサイズを刻みすぎてもメンテナンス性が下がってしまうため、ほとんどのサイトではxlまでを使うので充分でしょう。あえてxxlを使いたいケースは大画面TVや大きなディスプレイ向けに特化してレイアウトを調整したいケースに限られると思います。
+  </p>
+
+  <p>
+    画面横幅ではイメージが付きにくいと思いますので、ざっくりと参考例を挙げると以下の様な幅になります。
+    ※昨今は高解像度の端末や、横画面利用時等もあるので必ずこの基準に従うわけではないです
+  </p>
+
+  <div>
+    <img src="images/responsive_sizes.png" alt="レスポンシブサイズの対応（ざっくり）" class="img-thumbnails img-fluid mx-auto d-block">
+  </div>
+
+  <p>
+    Bootstrapのレスポンシブデザイン機能では上記のように5サイズまで個別に対応することが可能ですが、実際に5サイズすべて対応することは稀です。
+    対応サイズを増やすということはその分だけサイトのレイアウトパターンが増えるということであり、複雑にもなりますから実際にはスマホ＋PCの2サイズ、
+    またはスマホ＋タブレット＋PCの3サイズ程度を用意することが多いでしょう。
+  </p>
+  <p>
+    実際のWebサイト作成ではサイトのターゲット層や使われ方をよく考え、どのサイズを利用するのか検討します。
+    例えば、スマホでしか使われないことが分かっているサイトの場合、思い切って <code>xs</code>サイズのみを用意することもありますし、
+    高機能・複雑な機能を提供するサービスで、なるべく画面一杯に情報をわかりやすく出していきたい場合には、5サイズすべて対応することもあるでしょう。
+  </p>
+
+  <h2 class="pt-3">レスポンシブデザインの実装：実践編</h2>
+
+  <p>
+    レスポンシブ対応のグリッドを使うには、グリッドの <code>.col</code>クラスの拡張を利用します（ <code>.row</code>は変わりません）。
+    <code>col-#{サイズ名}-#{グリッド幅の数値}</code>の命名ルールになっており、サイズ名部分に <code>sm</code>や <code>md</code>、 <code>lg</code>
+    などを入れます。なお、 <code>xs</code>は例外で、名前を指定しない場合は <code>xs</code>を指定したことになります。
+    ※なので、<a href="bootstrap-grid.html">前回のグリッドレイアウトの解説</a>でやった例は実は全て <code>xs</code>指定していた、ということになります。
+  </p>
+
+  <p>
+    まずは例を出してみます。以下のリンクを別ウィンドウで開き、ウィンドウの横幅を伸びたり縮めたりしてみましょう。
+  </p>
+
+  <ul>
+    <li><a href="./responsive-sample1.html" target="_blank">レスポンシブサンプル1</a></li>
+  </ul>
+
+  <p>
+    ブラウザの横幅がmdサイズの境目（この境目をブレークポイントと呼びます）を超えるか超えないかでレイアウトが変わっていることが分かると思います。
+    この時（xsとmdが同時指定された場合）のルールは以下の通りです。
+  </p>
+
+  <ul>
+    <li>ブラウザ幅がmdサイズよりも大きい場合、<code>col-md-1</code>のルールが適用される</li>
+    <li>ブラウザ幅がmdサイズよりも小さい場合、<code>col-2</code>のルールが適用される</li>
+  </ul>
+
+  <p>
+    ちょっとわかりにくいように見えますが、複数のレスポンシブサイズが指定された場合は <strong>原則マッチする中で最大の指定サイズに従う</strong>
+    と理解すると良いです。
+    以下のサンプルは3つ以上のサイズ指定を行った例になります。挙動を確認してみましょう。
+  </p>
+
+  <ul>
+    <li><a href="./responsive-sample2.html" target="_blank">レスポンシブサンプル2</a></li>
+  </ul>
+
+  <h2 class="pt-3">レスポンシブデザインの実装：応用編</h2>
+  <div class="alert alert-primary">
+    注: この部分は<a href="https://getbootstrap.com/docs/5.0/utilities/display/" class="alert-link"
+               target="_blank">Utilities/Displayの項</a>に対応します（Hiding elements周辺）
+  </div>
+
+  <p>
+    レスポンシブデザインではここまでに行ったようなレイアウト上の幅調整以外に、 <strong>スマホでは非表示にしたい</strong>
+    といったケースも出てきます。
+    良くあるのはサイドメニューなどの画面が広い場合のみに表示したいナビゲーションコンテンツですが、そういった場合には
+    <code>.d-#{size}-none</code>及び <code>.d-#{size}-block</code>を組み合わせて使います。
+  </p>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Screen Size</th>
+      <th>Class</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>全てのサイズで非表示</td>
+      <td><code class="highlighter-rouge">.d-none</code></td>
+    </tr>
+    <tr>
+      <td>xsでのみ非表示</td>
+      <td><code class="highlighter-rouge">.d-none .d-sm-block</code></td>
+    </tr>
+    <tr>
+      <td>smでのみ非表示</td>
+      <td><code class="highlighter-rouge">.d-sm-none .d-md-block</code></td>
+    </tr>
+    <tr>
+      <td>mdでのみ非表示</td>
+      <td><code class="highlighter-rouge">.d-md-none .d-lg-block</code></td>
+    </tr>
+    <tr>
+      <td>lgでのみ非表示</td>
+      <td><code class="highlighter-rouge">.d-lg-none .d-xl-block</code></td>
+    </tr>
+    <tr>
+      <td>xlでのみ非表示</td>
+      <td><code class="highlighter-rouge">.d-xl-none</code></td>
+    </tr>
+    <tr>
+      <td>全てのサイズで表示</td>
+      <td><code class="highlighter-rouge">.d-block</code></td>
+    </tr>
+    <tr>
+      <td>xsでのみ表示</td>
+      <td><code class="highlighter-rouge">.d-block .d-sm-none</code></td>
+    </tr>
+    <tr>
+      <td>smでのみ表示</td>
+      <td><code class="highlighter-rouge">.d-none .d-sm-block .d-md-none</code></td>
+    </tr>
+    <tr>
+      <td>mdでのみ表示</td>
+      <td><code class="highlighter-rouge">.d-none .d-md-block .d-lg-none</code></td>
+    </tr>
+    <tr>
+      <td>lgでのみ表示</td>
+      <td><code class="highlighter-rouge">.d-none .d-lg-block .d-xl-none</code></td>
+    </tr>
+    <tr>
+      <td>xlでのみ表示</td>
+      <td><code class="highlighter-rouge">.d-none .d-xl-block</code></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p>
+    ちょっと複雑なように思えるかもしれませんが、以下の法則があってそれを覚えると理解しやすいと思います
+  </p>
+
+  <ul>
+    <li>デフォルトは表示する（ <code>.d-block</code>はなくても表示はされる）</li>
+    <li>レスポンシブグリッドの場合と同じく、 <strong>今の横幅に収まる最大サイズの定義に従う</strong></li>
+  </ul>
+
+  <ul>
+    <li><a href="./responsive-sample3.html" target="_blank">レスポンシブサンプル3</a></li>
+  </ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
