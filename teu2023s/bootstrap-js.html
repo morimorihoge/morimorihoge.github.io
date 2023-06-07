@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+  <title>Bootstrap5 JavaScript</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<!-- 本来CSSは別ファイルにすべきですが、教材の都合上1ファイルの方がまとまってて見やすいと思うのでここではstyleタグを使います :bow: -->
+<style>
+</style>
+<body>
+
+<div class="container">
+  <h1 id="main-title">Bootstrap JavaScriptの使い方</h1>
+  <hr>
+  <h2>JavaScript超基礎</h2>
+  <hr>
+  <h3>HTML Elementを取得する <code>document.getElementById()</code> と <code>document.querySelectorAll()</code></h3>
+  <p>
+    JavaScriptで表示中のページのHTMLを操作するには、まずJavaScriptの世界からHTML要素を扱えるように取得してくる必要があります。
+    HTML要素を取得する基本的な関数は <code>document.getElementById()</code> と <code>document.querySelectorAll()</code>
+    の2種類です。
+  </p>
+  <p>
+    <code>document.getElementById()</code> は
+    <string>HTMLに記述されているid属性を元に1つのHTML要素を決め打ちで取得します</string>
+    。
+    HTMLの仕様上、
+    <string>1つのHTML中に同じ名前のid属性の要素があってはいけない（HTML全体でユニーク）</string>
+    という規則があるため、idを付与する際には重複がないようにしましょう（HTML Validatorを使えば検知も可能です）。
+  </p>
+  <p>
+    例えば、以下の様なHTMLがあるとします。
+  </p>
+  <pre class="bg-light"><code>
+&#x3C;html&#x3E;
+&#x3C;head&#x3E;&#x3C;title&#x3E;sample&#x3C;/title&#x3E;&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+  &#x3C;h1 id="main-title"&#x3E;&#x898B;&#x51FA;&#x3057;01&#x3C;/h1&#x3E;
+  &#x3C;p&#x3E;&#x672C;&#x6587;&#x3C;/p&#x3E;
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</code></pre>
+  <p>この時、見出し部分を <code>document.getElementById()</code> で指定するには</p>
+  <pre class="bg-light"><code>document.getElementById("main-title");</code></pre>
+  <p>とします。</p>
+  <p>
+    ChromeのDeveloper
+    ToolsにあるConsole機能では、今開いているページに対して直接JavaScirptを実行することができますので、実際にこのページで試してみると良いでしょう。なお変更した内容をリセットしたい場合はブラウザをリロードすればOKです。
+  </p>
+
+  <h3>id指定要素に対する操作</h3>
+  <p>
+    単に <code>document.getElementById("main-title");</code> としただけでは指定したHTML Elementが
+    表示されるだけかと思いますので、次はこの要素を操作してみましょう。以下のコードをChromeのConsoleタブで実行します。
+  </p>
+  <pre class="bg-light"><code>document.getElementById("main-title").innerHTML = 'ほげほげ';</code></pre>
+  <p>
+    すると、今表示しているページのh1見出し部分が「ほげほげ」に置き換わったと思います。<a href="http://api.jquery.com/text/"
+                                                           target="_blank">jQueryの.text()メソッド</a>は対象となるタグ内の文字列を置き換える機能がありますので、書き換わったわけです。
+  </p>
+  <p>
+    同じように今度は以下のコードを実行してみましょう（※全て半角です。中括弧・丸括弧の違いに注意）
+  </p>
+  <pre>
+document.getElementById("main-title").style.color = "red";</pre>
+  <p>
+    実行すると、h1要素が赤い色になったと思います。同じように元に戻すには
+  </p>
+  <pre class="bg-light"><code>document.getElementById("main-title").style.color = null;</code></pre>
+  <p>
+    とします。これは <a
+      href="https://developer.mozilla.org/ja/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information#style_%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%AE%E8%A8%AD%E5%AE%9A"
+      target="_blank">style プロパティの設定
+  </a>を使って対象となる要素のstyle属性を書き換えたということになります。
+  </p>
+  <p>
+    JavaScriptでのHTML要素操作の基本はこのようにして操作したいHTML Elementを特定し、取得したHTML Elementオブジェクトに操作したいメソッドを実行することになります。
+  </p>
+
+  <h3>セレクタ指定による複数同時操作</h3>
+  <p>
+    <code>document.querySelectorAll()</code> を使うことで、セレクタに一致する全ての要素を取得することができます。
+    これにより、複数の要素を一括で操作することができます。
+  </p>
+  <p>
+    実際にやってみましょう。以下のコードを実行してみて下さい。
+  </p>
+  <pre>
+Array.from(document.querySelectorAll("h3")).forEach(
+    (node) => { node.style.color = "red" }
+);</pre>
+  <p>
+    <code>Array.from</code> や <code>forEach</code> 等についてはここでは詳細な説明を省略しますが、
+    <code>document.querySelectorAll()</code>
+    が返却するオブジェクトが1つのHTML Elementではなく複数の要素を示すNodeListというオブジェクトになっているため、それを配列展開した上で
+    中にあるHTML Element要素を一つずつ処理するということをやっています。
+    現時点ではこの書き方を真似すればセレクタ一括で要素に対してアクセスできるということが分かればOKです。
+  </p>
+  <p>
+    一方で、上記のコードのように <code>h3</code> セレクタを指定すると全てのh3タグが変更されてしまいますが、実際には
+    h3要素のうち一部だけを変更したいということがあります。
+    こうした柔軟な選択をしたいときのために、HTML側にあらかじめJavaScriptから指定するための <code>class</code> を定義しておくという手がよく使われます。
+    これはCSSで使うクラスと同じ物を使っても良いのですが、JavaScript操作用にそれぞれ別のクラスを割り当てることもあります。
+  </p>
+  <p class="pickup-paragraph">
+    以下のコードを実行してみると、この段落だけ色が赤くなります。
+  </p>
+  <pre>
+Array.from(document.querySelectorAll("p.pickup-paragraph")).forEach(
+    (node) => { node.style.color = "red" }
+);</pre>
+  </figure>
+  <p>
+    今回セレクタ指定に <code>p.pickup-paragraph</code>を使ったため、pタグの中でもpickup-paragraphクラスが指定された要素のみが指定されました。
+    （実際にHTMLソースも確認してみて下さい）。
+  </p>
+  <p>
+    以上の注意を気にしておけば、 <a href="https://getbootstrap.jp/docs/5.0/components/alerts/#javascript-behavior"
+                           target="_blank">Bootstrap
+    Componentを操作するHTML</a>なら見よう見まねでなんとか使えるかと思います。
+    とにかくJavaScriptに慣れていない内は <strong>ChromeのConsoleタブ</strong>を使ってエラーが出ていないかや、選択したい要素が選択できているかをチェックすると良いでしょう。
+  </p>
+
+  <h3>HTMLに組み込んで使う</h3>
+  <p>
+    開発者ツールのJavaScript Consoleからではなく、任意のタイミングで任意のコードを実行するにはイベントを設定します。
+    最も良く使われるのは <code>document.getElementById('ID').addEventListener()</code>によるイベント設定です。
+    自分のHTMLの中（原則 <code>bodyの閉じたタグのすぐ手前、BootstrapのJavaScriptの読み込み後</code>）で以下の様なコードを記述することで、h1タグ要素をクリックしたときに任意のJavaScriptコードを実行することができます。
+  </p>
+
+  <pre class="bg-light"><code>
+    &lt;script&gt;
+    document.getElementById("main-title").addEventListener("click", () => {
+      // ここに処理したいコードを書く
+      alert("main-titleがクリックされました");
+    });
+    &lt;/script&gt;
+  </code></pre>
+
+  <p>
+    <code>'click'</code>の部分は他にも指定することができ、要素によっても設定できるイベントは異なりますが、<code>mouseover</code>なども使えます。
+    また、<code>input</code>タグの様にキー入力が可能な要素であれば <code>keyup</code>といったイベントで「キーボードのキーが押された」といったイベントも取ることができます。
+    以下はボタンの見た目の <code>div</code>クラスに <code>click_sample</code>というid属性を付け、id属性でボタンに対してclickイベントに反応するコードを登録しています。
+  </p>
+
+  <div>
+    <div id="click-sample" class="btn btn-primary">クリックサンプルボタン</div>
+  </div>
+
+  <pre class="bg-light"><code>
+    &lt;script&gt;
+    document.getElementById("click-sample").addEventListener("click", () => {
+      alert('ボタンが押されました');
+    });
+    &lt;/script&gt;
+  </code></pre>
+
+  <p>
+    JavaScriptはプログラミング言語のため、HTMLと違って <strong class="text-danger">少しでも書き方にエラーがあると実行を停止してしまいます</strong>。
+    そのため習得に時間はかかりますが、その分HTML/CSS単体ではできないことができるようになるので、少しずつでも使えるようになっていくとより良いWebサイトが作れるようになると思います。
+  </p>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+<script>
+  document.getElementById("click-sample").addEventListener("click", () => {
+    alert('ボタンが押されました');
+  });
+</script>
+
+</body>
+</html>
