@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-110079190-1');
+  </script>
+
+  <title>Widgets</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <script
+      src="https://code.jquery.com/jquery-3.2.1.js"
+      integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+      crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S17W47TNB2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S17W47TNB2');
+</script>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Widgetサンプル</h1>
+    </div>
+    <div class="col-xs-12">
+      <h2>Twitter Widget</h2>
+      <p>
+        Twitter関連の埋め込みWidgetは <a href="https://dev.twitter.com/web/overview">このページに一覧されている</a>。
+      </p>
+      <p>
+        TwitterのTweet埋め込みは、ブラウザでTwitterのTweetを表示すれば、メニューから埋め込みタグが取得できる。
+      </p>
+      <div class="thumbnail">
+        <img src="images/embed_tweet.png" alt="tweet menu">
+      </div>
+      <p>以下サンプル</p>
+    </div>
+    <div class="col-xs-12">
+      <blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">てーすーと</p>&mdash; teu2017s (@teu2017s) <a
+          href="https://twitter.com/teu2017s/status/874817879731970048">2017年6月14日</a></blockquote>
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <!--<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">【上空に寒気　金曜の関東は急な雨に注意】 <a href="https://t.co/Fs6iUGeyuF">https://t.co/Fs6iUGeyuF</a> 15日(木)から16日(金)かけて上空に寒気を伴った気圧の谷が本州を南下。16日(金)は日差しの届く..</p>&mdash; tenki.jp (@tenkijp) <a href="https://twitter.com/tenkijp/status/874894257752027136">2017年6月14日</a></blockquote>-->
+      <!--<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+      <!--<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">流しカワウソ。<br>省略形の後、逆流。<a href="https://twitter.com/hashtag/%E5%B8%82%E5%B7%9D%E5%B8%82%E5%8B%95%E6%A4%8D%E7%89%A9%E5%9C%92?src=hash">#市川市動植物園</a>  <a href="https://twitter.com/hashtag/%E3%82%B3%E3%83%84%E3%83%A1%E3%82%AB%E3%83%AF%E3%82%A6%E3%82%BD?src=hash">#コツメカワウソ</a> <a href="https://t.co/BBNWy5y4DD">pic.twitter.com/BBNWy5y4DD</a></p>&mdash; 市川市動植物園（公式） (@ichikawa_zoo) <a href="https://twitter.com/ichikawa_zoo/status/874846827006349314">2017年6月14日</a></blockquote>-->
+      <!--<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+      <!--<a class="twitter-timeline" data-lang="ja" data-theme="dark" data-link-color="#19CF86" href="https://twitter.com/TwitterDev">Tweets by TwitterDev</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+    </div>
+
+    <div class="col-xs-12">
+      <p>
+        Tweetボタン等を置く場合には、事前に <a href="https://dev.twitter.com/web/javascript/loading">こちらのページ</a> を参考に、TwitterのJavaScriptを読み込んでおく必要がある。
+        headタグ内のBootstrap JavaScript読み込みの後ろあたりに追記しておくと良い。
+      </p>
+      <pre>&#x3C;script async src=&#x22;//platform.twitter.com/widgets.js&#x22; charset=&#x22;utf-8&#x22;&#x3E;&#x3C;/script&#x3E;</pre>
+    </div>
+    <div class="col-xs-12">
+      <p>
+        上記のscriptが読み込まれていれば、 <a href="https://dev.twitter.com/web/tweet-button">Tweet Button</a> にあるタグを使うことでTweetボタンなどを挿入することができる。
+      </p>
+      <pre>&#x3C;a class=&#x22;twitter-share-button&#x22;
+   href=&#x22;https://twitter.com/intent/tweet?text=Hello%20world&#x22;
+   data-size=&#x22;large&#x22;&#x3E;
+  Tweet&#x3C;/a&#x3E;</pre>
+    </div>
+    <div class="col-xs-12">
+      <a class="twitter-share-button"
+         href="https://twitter.com/intent/tweet?text=Hello%20world"
+         data-size="large">
+        Tweet</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Google Maps</h2>
+      <p>
+        Google Mapsはいくつかの埋め込み方法が提供されているが、最も簡単に使えるのがiframeによる埋め込み機能である。
+        <a href="https://maps.google.co.jp">Google Mapsのページ</a>で表示させたい場所を検索したら、共有リンクから地図埋め込みタグを取得できる。
+      </p>
+      <div class="thumbnail">
+        <img src="images/google_maps_01.png" alt="google maps1">
+      </div>
+      <div class="thumbnail">
+        <img src="images/google_maps_02.png" alt="google maps2">
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <p>以下、実際に埋め込んだものとなる。</p>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.4652170734903!2d139.33040501582144!3d35.640908139788536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60191dc9ad18a8ed%3A0x74dda37102b72270!2z56uc5rOJ5a-644Gu5rmvIOWFq-eOi-WtkOOBv-OBquOBv-mHjuW6lw!5e0!3m2!1sja!2sjp!4v1497428136794" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3243.0577223757095!2d139.33716081516337!3d35.62630348020721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60191da6d0a3a261%3A0x337318568a7aaa3b!2z5p2x5Lqs5bel56eR5aSn5a2mIOWFq-eOi-WtkOOCreODo-ODs-ODkeOCuQ!5e0!3m2!1sja!2sjp!4v1497415048644" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+    <div class="col-xs-12">
+      <p>
+        他にも、Google Mapsの「マイプレイス」-> 「マイマップ」で作成した地図は公開設定にすると同様に埋め込むことができるので、地図・地理ベースの情報を効果的に見せたい時には便利である。
+        埋め込んだ地図の中をJavaScriptで制御したければ、 <a href="https://developers.google.com/maps/documentation/javascript/?hl=ja">Maps JavaScript API</a>を使うことでより凝った見せ方も可能だが、こちらはJavaScript実装の知識がある程度必要でやや難しいので、試してみたい人はサンプルコードを挿入して動かしてみるところから始めると良い。
+      </p>
+      <iframe src="https://www.google.com/maps/d/embed?mid=1WewFfpWl97aW8jEIzAnHC_yHwDI" width="640" height="480"></iframe>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Google Forms</h2>
+      <p>
+        ちょっとした問い合わせレベルであれば、Google Driveに搭載されているGoogle Formsが便利である。
+        <a href="https://drive.google.com/drive/">Googleドライブ</a>のサイトにログインし、左上の新規からフォームを選ぶとフォーム作成画面になる。
+      </p>
+      <div class="thumbnail">
+        <img src="images/google_forms_01.png" alt="google forms1">
+      </div>
+      <div class="thumbnail">
+        <img src="images/google_forms_02.png" alt="google forms2">
+      </div>
+    </div>
+    <div class="col-xs-12">
+      サイト内に埋め込むと以下の様になる。または別ページとして <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdzoxoZj-9PXzCWHn9GDP1ITDEtvX5-MSAdOS8kIZFFz4g5FQ/viewform?usp=sf_link">フォーム入力ページをリンクする方法</a> もある。
+    </div>
+    <div class="col-xs-12">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdzoxoZj-9PXzCWHn9GDP1ITDEtvX5-MSAdOS8kIZFFz4g5FQ/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます...</iframe>
+    </div>
+    <div class="col-xs-12">
+      <p>
+        入力した内容はGoogle Formsの編集ページに行けば回答チャートで見ることができる。
+      </p>
+      <div class="thumbnail">
+        <img src="images/google_forms_03.png" alt="google forms3">
+      </div>
+      <p>
+        集計等が取りたい場合には、回答先をGoogle SpreadSheetにすることで、一覧化も可能である。うまく使うと研究でアンケートを採ったりするのにも使えるので強力である。
+      </p>
+      <div class="thumbnail">
+        <img src="images/google_forms_04.png" alt="google forms4">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA" frameborder="0" allowfullscreen></iframe></div>
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA" frameborder="0" allowfullscreen></iframe></div>
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA" frameborder="0" allowfullscreen></iframe></div>
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA" frameborder="0" allowfullscreen></iframe></div>
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA" frameborder="0" allowfullscreen></iframe></div>
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA" frameborder="0" allowfullscreen></iframe></div>
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA" frameborder="0" allowfullscreen></iframe></div>
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA" frameborder="0" allowfullscreen></iframe></div>
+      <div class="col-xs-4"><iframe src="https://www.youtube.com/embed/we4KoHFuJbA?start=2000" frameborder="0" allowfullscreen></iframe></div>
+    </div>
+
+
+  </div>
+</div>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-101005686-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
